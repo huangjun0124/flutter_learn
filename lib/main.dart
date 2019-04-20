@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('LovingCat'),
       ),
-        body: CatManager(),
+        body: CatManager('折耳猫'),
     ));
   }
 }
