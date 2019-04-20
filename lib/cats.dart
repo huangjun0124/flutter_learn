@@ -15,8 +15,8 @@ class Cats extends StatelessWidget {
           .map((e) => Card(
                 child: Column(
                   children: <Widget>[
-                    Image.asset('assets/cat001.jpg'),
-                    Text(e)],
+                    Text(e),
+                    Image.asset('assets/cat001.jpg')],
                 ),
               ))
           .toList(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_learn/cat_control.dart';
 
 import './cats.dart';
 
@@ -39,18 +40,16 @@ class _CatManagerState extends State<CatManager> {
       children: [
         Container(
           margin: EdgeInsets.all(10.0), // 按钮周围留10像素空白
-          child: RaisedButton(
-            color: Theme.of(context).primaryColor,
-            onPressed: () {
-              setState(() {
-                _cats.add('加菲猫');
-              });
-            },
-            child: Text('Click To Add Cat'),
-          ),
+          child: CatControl(_addCat)
         ),
         Cats(_cats)
       ],
     );
+  }
+
+  void _addCat(String cat){
+    setState(() {
+      _cats.add(cat);
+    });
   }
 }
