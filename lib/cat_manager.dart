@@ -5,7 +5,7 @@ import './cats.dart';
 
 class CatManager extends StatefulWidget {
   final String startingCat;
-  CatManager(this.startingCat){
+  CatManager({this.startingCat='折耳猫'}){
     print('[CatManager widget] Constructer') ;
   }
 
@@ -40,6 +40,7 @@ class _CatManagerState extends State<CatManager> {
         Container(
           margin: EdgeInsets.all(10.0), // 按钮周围留10像素空白
           child: RaisedButton(
+            color: Theme.of(context).primaryColor,
             onPressed: () {
               setState(() {
                 _cats.add('加菲猫');
