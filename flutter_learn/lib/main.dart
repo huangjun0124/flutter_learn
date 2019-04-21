@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import './cat_manager.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  debugPaintSizeEnabled = true;
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.cyan,
-        accentColor: Colors.lightBlue
-      ),
+      debugShowMaterialGrid: true,
+        theme: ThemeData(
+            primarySwatch: Colors.cyan, accentColor: Colors.lightBlue),
         home: Scaffold(
           appBar: AppBar(
             title: Text('LovingCat'),
-      ),
-        body: CatManager(),
-    ));
+          ),
+          body: CatManager(),
+        ));
   }
 }
