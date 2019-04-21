@@ -6,7 +6,7 @@ import './cats.dart';
 
 class CatManager extends StatefulWidget {
   final String startingCat;
-  CatManager({this.startingCat='折耳猫'}){
+  CatManager({this.startingCat}){
     print('[CatManager widget] Constructer') ;
   }
 
@@ -23,7 +23,9 @@ class _CatManagerState extends State<CatManager> {
   @override
   void initState() {
     print('[CatManager widget] initState') ;
-    _cats.add(widget.startingCat);// widget refres to State property, current father widget
+    if(widget.startingCat != null){
+      _cats.add(widget.startingCat);// widget refres to State property, current father widget
+    }
     super.initState();
   }
 
@@ -42,7 +44,7 @@ class _CatManagerState extends State<CatManager> {
           margin: EdgeInsets.all(10.0), // 按钮周围留10像素空白
           child: CatControl(_addCat)
         ),
-        Cats(_cats)
+       Expanded(child: Cats(_cats))
       ],
     );
   }

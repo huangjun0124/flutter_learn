@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import './cat_manager.dart';
 
 void main() {
-  debugPaintSizeEnabled = true;
+  //debugPaintSizeEnabled = true;
   runApp(MyApp());
 }
 
@@ -12,14 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowMaterialGrid: true,
+      debugShowMaterialGrid: false,
         theme: ThemeData(
             primarySwatch: Colors.cyan, accentColor: Colors.lightBlue),
         home: Scaffold(
           appBar: AppBar(
             title: Text('LovingCat'),
           ),
-          body: CatManager(),
+          body: CatManager(), //'折耳猫'
         ));
   }
 }
