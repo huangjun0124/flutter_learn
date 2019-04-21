@@ -20,6 +20,7 @@ class Products extends StatelessWidget {
             alignment: MainAxisAlignment.center,
             children: <Widget>[
               FlatButton(
+                textColor: Colors.indigoAccent,
                 child: Text('Details'),
                 onPressed: () => Navigator
                         .push<bool>(

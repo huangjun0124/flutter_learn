@@ -16,10 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // debugShowMaterialGrid: true,
       theme: ThemeData(
-          brightness: Brightness.light,
-          primarySwatch: Colors.deepOrange,
-          accentColor: Colors.deepPurple),
-      // home: AuthPage(),
+          //brightness: Brightness.light,
+          primarySwatch: Colors.cyan,
+          accentColor: Colors.lightBlue),
+      //home: AuthPage(), 下面 route 配置了 “/”  这里就不能在配置 home 了
       routes: {
         '/': (BuildContext context) => ProductsPage(),
         '/admin': (BuildContext context) => ProductsAdminPage(),

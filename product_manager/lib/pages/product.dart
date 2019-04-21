@@ -31,7 +31,7 @@ class ProductPage extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10.0),
               child: RaisedButton(
-                color: Theme.of(context).accentColor,
+                textColor: Colors.deepPurpleAccent,
                 child: Text('DELETE'),
                 onPressed: () => Navigator.pop(context, true),
               ),
