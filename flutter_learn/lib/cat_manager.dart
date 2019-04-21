@@ -44,7 +44,7 @@ class _CatManagerState extends State<CatManager> {
           margin: EdgeInsets.all(10.0), // 按钮周围留10像素空白
           child: CatControl(_addCat)
         ),
-       Expanded(child: Cats(_cats))
+       Expanded(child: Cats(_cats, deleteCat: _deleteCat,))
       ],
     );
   }
@@ -52,6 +52,12 @@ class _CatManagerState extends State<CatManager> {
   void _addCat(String cat){
     setState(() {
       _cats.add(cat);
+    });
+  }
+
+  void _deleteCat(int index) {
+    setState(() {
+      _cats.removeAt(index);
     });
   }
 }

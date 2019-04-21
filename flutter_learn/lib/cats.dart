@@ -4,8 +4,9 @@ import './pages/cat_detail.dart';
 
 class Cats extends StatelessWidget {
   final List<String> _cats;
+  final Function deleteCat;
 
-  Cats(this._cats) {
+  Cats(this._cats, {this.deleteCat}) {
     print('[Cats widget] Constructer');
   }
 
@@ -43,12 +44,18 @@ class Cats extends StatelessWidget {
               FlatButton(
                 textColor: Colors.indigoAccent,
                 child: Text('Details'),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                    return CatDetailPage();
-                  }));
-                },
+                onPressed: () => Navigator.push<bool>(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            CatDetailPage(_cats[index], 'assets/cat001.jpg'),
+                      ),
+                    ).then((bool value) {
+                      if (value) {
+                        deleteCat(index);
+                        print('deleted index:' + index.toString());
+                      }
+                    }),
               )
             ],
           )
