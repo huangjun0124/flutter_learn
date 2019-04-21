@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import './pages/cat_detail.dart';
 
 class Cats extends StatelessWidget {
   final List<String> _cats;
@@ -35,7 +36,22 @@ class Cats extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Image.asset('assets/cat001.jpg'),
-          Text(_cats[index])
+          Text(_cats[index]),
+          ButtonBar(
+            alignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton(
+                textColor: Colors.indigoAccent,
+                child: Text('Details'),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return CatDetailPage();
+                  }));
+                },
+              )
+            ],
+          )
         ],
       ),
     );
