@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_learn/pages/auth.dart';
-import './pages/products_page.dart';
+import './pages/cats_page.dart';
 
 void main() {
   //debugPaintSizeEnabled = true;

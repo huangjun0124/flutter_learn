@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../cat_manager.dart';
-import './cat_edit.dart';
+import './cats_admin.dart';
 
-class ProductsPage extends StatelessWidget {
+class CatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,7 +16,7 @@ class ProductsPage extends StatelessWidget {
               automaticallyImplyLeading: false,
               title: Text('Choose'),),
             ListTile(title: Text('Manage Cats'),onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>EditCatPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>CatsAdminPage()));
             },)
           ],
         ),
