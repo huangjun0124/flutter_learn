@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ProductEditPage extends StatefulWidget {
   final Function addProduct;
   final Function updateProduct;
@@ -24,9 +23,13 @@ class _ProductEditPageState extends State<ProductEditPage> {
     'image': 'assets/food.jpg'
   };
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _titleFocusNode = FocusNode();
+  final _descriptionFocusNode = FocusNode();
+  final _priceFocusNode = FocusNode();
 
   Widget _buildTitleTextField() {
     return TextFormField(
+        focusNode: _titleFocusNode,
         decoration: InputDecoration(labelText: 'Product Title'),
         initialValue: widget.product == null ? '' : widget.product['title'],
         validator: (String value) {
@@ -38,11 +41,12 @@ class _ProductEditPageState extends State<ProductEditPage> {
         onSaved: (String value) {
           _formData['title'] = value;
         },
-      );
+     );
   }
 
   Widget _buildDescriptionTextField() {
     return  TextFormField(
+        focusNode: _descriptionFocusNode,
         maxLines: 4,
         decoration: InputDecoration(labelText: 'Product Description'),
         initialValue:
@@ -56,11 +60,12 @@ class _ProductEditPageState extends State<ProductEditPage> {
         onSaved: (String value) {
           _formData['description'] = value;
         },
-      );
+     );
   }
 
   Widget _buildPriceTextField() {
     return TextFormField(
+        focusNode: _priceFocusNode,
         keyboardType: TextInputType.number,
         decoration: InputDecoration(labelText: 'Product Price'),
         initialValue:
@@ -78,26 +83,11 @@ class _ProductEditPageState extends State<ProductEditPage> {
       );
   }
 
-  void _submitForm() {
-    if (!_formKey.currentState.validate()) {
-      return;
-    }
-    _formKey.currentState.save();
-    if (widget.product == null) {
-      widget.addProduct(_formData);
-    } else {
-      widget.updateProduct(widget.productIndex, _formData);
-    }
-
-    Navigator.pushReplacementNamed(context, '/products');
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildPageContent(BuildContext context) {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 550.0 ? 500.0 : deviceWidth * 0.95;
     final double targetPadding = deviceWidth - targetWidth;
-    final Widget pageContent = GestureDetector(
+    return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(FocusNode());
       },
@@ -132,6 +122,25 @@ class _ProductEditPageState extends State<ProductEditPage> {
         ),
       ),
     );
+  }
+
+  void _submitForm() {
+    if (!_formKey.currentState.validate()) {
+      return;
+    }
+    _formKey.currentState.save();
+    if (widget.product == null) {
+      widget.addProduct(_formData);
+    } else {
+      widget.updateProduct(widget.productIndex, _formData);
+    }
+
+    Navigator.pushReplacementNamed(context, '/products');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Widget pageContent = _buildPageContent(context);
     return widget.product == null
         ? pageContent
         : Scaffold(
