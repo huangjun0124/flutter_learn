@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_learn/pages/cat_creat.dart';
 import 'package:flutter_learn/pages/cat_list.dart';
-import 'package:flutter_learn/pages/cats_page.dart';
+import 'package:flutter_learn/pages/cats_main_page.dart';
 
 class CatsAdminPage extends StatelessWidget{
   @override
@@ -23,7 +23,7 @@ class CatsAdminPage extends StatelessWidget{
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (BuildContext context) => CatsPage()));
+                          builder: (BuildContext context) => CatsMainPage()));
                 },
               )
             ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import './cats_page.dart';
+import './cats_main_page.dart';
 
 class AuthPage extends StatelessWidget{
   @override
@@ -16,7 +16,7 @@ class AuthPage extends StatelessWidget{
             Navigator.pushReplacement(     // 替换当前页，这将没有返回按钮
               context,
               MaterialPageRoute(
-                  builder: (BuildContext context) => CatsPage()),
+                  builder: (BuildContext context) => CatsMainPage()),
             );
           },
         ),

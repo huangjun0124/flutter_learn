@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../cat_manager.dart';
 import './cats_admin.dart';
 
-class CatsPage extends StatelessWidget {
+class CatsMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -14,10 +14,14 @@ class CatsPage extends StatelessWidget {
           children: <Widget>[
             AppBar(
               automaticallyImplyLeading: false,
-              title: Text('Choose'),),
-            ListTile(title: Text('Manage Cats'),onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context)=>CatsAdminPage()));
-            },)
+              title: Text('Choose'),
+            ),
+            ListTile(
+              title: Text('Manage Cats'),
+              onTap: () {
+                Navigator.pushReplacementNamed(context, '/admin');
+              },
+            )
           ],
         ),
       ),
