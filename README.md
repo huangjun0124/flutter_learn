@@ -21,3 +21,5 @@ samples, guidance on mobile development, and a full API reference.
 Youtube course：[Flutter Tutorial for Beginners](https://www.youtube.com/watch?v=GLSG_Wh_YWc)
 <br>
 官方文档链接：[中文文档](https://flutterchina.club/setup-windows/)
+
+Flutter 仓库地址：[Flutter Packages](https://pub.dartlang.org/flutter)
