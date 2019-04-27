@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:product_manager/models/product.dart';
+import 'package:product_manager/scoped-models/main.dart';
 
 import 'package:scoped_model/scoped_model.dart';
-
-import '../models/product.dart';
-import '../scoped-models/products.dart';
 
 class ProductEditPage extends StatefulWidget {
   @override
@@ -26,23 +25,23 @@ class _ProductEditPageState extends State<ProductEditPage> {
 
   Widget _buildTitleTextField(Product product) {
     return TextFormField(
-        focusNode: _titleFocusNode,
-        decoration: InputDecoration(labelText: 'Product Title'),
-        initialValue: product == null ? '' : product.title,
-        validator: (String value) {
-          // if (value.trim().length <= 0) {
-          if (value.isEmpty || value.length < 5) {
-            return 'Title is required and should be 5+ characters long.';
-          }
-        },
-        onSaved: (String value) {
-          _formData['title'] = value;
-        },
+      focusNode: _titleFocusNode,
+      decoration: InputDecoration(labelText: 'Product Title'),
+      initialValue: product == null ? '' : product.title,
+      validator: (String value) {
+        // if (value.trim().length <= 0) {
+        if (value.isEmpty || value.length < 5) {
+          return 'Title is required and should be 5+ characters long.';
+        }
+      },
+      onSaved: (String value) {
+        _formData['title'] = value;
+      },
     );
   }
 
   Widget _buildDescriptionTextField(Product product) {
-    return  TextFormField(
+    return TextFormField(
         focusNode: _descriptionFocusNode,
         maxLines: 4,
         decoration: InputDecoration(labelText: 'Product Description'),
@@ -55,32 +54,31 @@ class _ProductEditPageState extends State<ProductEditPage> {
         },
         onSaved: (String value) {
           _formData['description'] = value;
-        }
-    );
+        });
   }
 
   Widget _buildPriceTextField(Product product) {
     return TextFormField(
-        focusNode: _priceFocusNode,
-        keyboardType: TextInputType.number,
-        decoration: InputDecoration(labelText: 'Product Price'),
-        initialValue: product == null ? '' : product.price.toString(),
-        validator: (String value) {
-          // if (value.trim().length <= 0) {
-          if (value.isEmpty ||
-              !RegExp(r'^(?:[1-9]\d*|0)?(?:\.\d+)?$').hasMatch(value)) {
-            return 'Price is required and should be a number.';
-          }
-        },
-        onSaved: (String value) {
-          _formData['price'] = double.parse(value);
-        },
+      focusNode: _priceFocusNode,
+      keyboardType: TextInputType.number,
+      decoration: InputDecoration(labelText: 'Product Price'),
+      initialValue: product == null ? '' : product.price.toString(),
+      validator: (String value) {
+        // if (value.trim().length <= 0) {
+        if (value.isEmpty ||
+            !RegExp(r'^(?:[1-9]\d*|0)?(?:\.\d+)?$').hasMatch(value)) {
+          return 'Price is required and should be a number.';
+        }
+      },
+      onSaved: (String value) {
+        _formData['price'] = double.parse(value);
+      },
     );
   }
 
   Widget _buildSubmitButton() {
-    return ScopedModelDescendant<ProductsModel>(
-      builder: (BuildContext context, Widget child, ProductsModel model) {
+    return ScopedModelDescendant<MainModel>(
+      builder: (BuildContext context, Widget child, MainModel model) {
         return RaisedButton(
           child: Text('Save'),
           textColor: Colors.white,
@@ -157,8 +155,8 @@ class _ProductEditPageState extends State<ProductEditPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScopedModelDescendant<ProductsModel>(
-      builder: (BuildContext context, Widget child, ProductsModel model) {
+    return ScopedModelDescendant<MainModel>(
+      builder: (BuildContext context, Widget child, MainModel model) {
         final Widget pageContent =
             _buildPageContent(context, model.selectedProduct);
         return model.selectedProductIndex == null
