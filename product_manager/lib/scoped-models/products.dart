@@ -1,77 +1,84 @@
+import 'package:flutter/material.dart';
+
 import 'package:scoped_model/scoped_model.dart';
 
-import '../models/product.dart';
+import '../widgets/products/products.dart';
+import '../scoped-models/main.dart';
 
-mixin ProductsModel on Model {
-  List<Product> _products = [];
-  int _selectedProductIndex;
-  bool _showFavorites = false;
+class ProductsPage extends StatefulWidget {
+  final MainModel model;
 
-  List<Product> get products {
-    return List.from(_products);
+  ProductsPage(this.model);
+
+  @override
+  State<StatefulWidget> createState() {
+    return _ProductsPageState();
+  }
+}
+
+class _ProductsPageState extends State<ProductsPage> {
+  @override
+  initState() {
+    widget.model.fetchProducts();
+    super.initState();
   }
 
-  List<Product> get displayedProducts {
-    if (_showFavorites) {
-      return _products.where((Product product) => product.isFavorite).toList();
-    }
-    return List.from(_products);
+  Widget _buildSideDrawer(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          AppBar(
+            automaticallyImplyLeading: false,
+            title: Text('Choose'),
+          ),
+          ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('Manage Products'),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, '/admin');
+            },
+          )
+        ],
+      ),
+    );
   }
 
-  int get selectedProductIndex {
-    return _selectedProductIndex;
+  Widget _buildProductsList() {
+    return ScopedModelDescendant(
+      builder: (BuildContext context, Widget child, MainModel model) {
+        Widget content = Center(child: Text('No Products Found!'));
+        if (model.displayedProducts.length > 0 && !model.isLoading) {
+          content = Products();
+        } else if (model.isLoading) {
+          content = Center(child: CircularProgressIndicator());
+        }
+        return content;
+      },
+    );
   }
 
-  Product get selectedProduct {
-    if (_selectedProductIndex == null) {
-      return null;
-    }
-    return _products[_selectedProductIndex];
-  }
-
-  bool get displayFavoritesOnly {
-    return _showFavorites;
-  }
-
-  void addProduct(Product product) {
-    _products.add(product);
-    _selectedProductIndex = null;
-    notifyListeners();
-  }
-
-  void updateProduct(Product product) {
-    _products[_selectedProductIndex] = product;
-    _selectedProductIndex = null;
-    notifyListeners();
-  }
-
-  void deleteProduct() {
-    _products.removeAt(_selectedProductIndex);
-    _selectedProductIndex = null;
-    notifyListeners();
-  }
-
-  void toggleProductFavoriteStatus() {
-    final bool isCurrentlyFavorite = selectedProduct.isFavorite;
-    final bool newFavoriteStatus = !isCurrentlyFavorite;
-    final Product updatedProduct = Product(
-        title: selectedProduct.title,
-        description: selectedProduct.description,
-        price: selectedProduct.price,
-        image: selectedProduct.image,
-        isFavorite: newFavoriteStatus);
-    _products[_selectedProductIndex] = updatedProduct;
-    _selectedProductIndex = null;
-    notifyListeners();
-  }
-
-  void selectProduct(int index) {
-    _selectedProductIndex = index;
-    notifyListeners();
-  }
-
-  void toggleDisplayMode() {
-    _showFavorites = !_showFavorites;
-    notifyListeners();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: _buildSideDrawer(context),
+      appBar: AppBar(
+        title: Text('EasyList'),
+        actions: <Widget>[
+          ScopedModelDescendant<MainModel>(
+            builder: (BuildContext context, Widget child, MainModel model) {
+              return IconButton(
+                icon: Icon(model.displayFavoritesOnly
+                    ? Icons.favorite
+                    : Icons.favorite_border),
+                onPressed: () {
+                  model.toggleDisplayMode();
+                },
+              );
+            },
+          )
+        ],
+      ),
+      body: _buildProductsList(),
+    );
   }
 }
