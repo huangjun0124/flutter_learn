@@ -17,7 +17,7 @@ class ProductListPage extends StatelessWidget {
               return ProductEditPage();
             },
           ),
-        ).then((_){model.selectProduct(null);});
+        );
       },
     );
   }
@@ -46,7 +46,7 @@ class ProductListPage extends StatelessWidget {
                   ListTile(
                     leading: CircleAvatar(
                       backgroundImage:
-                          AssetImage(model.allProducts[index].image),
+                          NetworkImage(model.allProducts[index].image),
                     ),
                     title: Text(model.allProducts[index].title),
                     subtitle:
